@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 						I.velocity = Vector2.left * Controller.MoveSpeed;
 						Anim.SetBool("IsMoving", true);
 						SR.flipX = false;
+						WasLastLeft = true;
 					}
 				}
 				else if (Hit.gameObject.name == "RightButton")
@@ -53,6 +54,7 @@ public class PlayerController : MonoBehaviour
 						I.velocity = Vector2.right * Controller.MoveSpeed;
 						Anim.SetBool("IsMoving", true);
 						SR.flipX = true;
+						WasLastLeft = false;
 
 					}
 				}
