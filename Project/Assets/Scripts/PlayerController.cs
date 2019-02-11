@@ -1,68 +1,117 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-	public enum Buttons
-	{
-		Left,
-		Right,
-		Up,
-	};
+	public Sprite IdleSide;
 
-	public Buttons Button;
+	private bool WasLastLeft;
+	private GameController Controller;
+	private Animator Anim;
+	private SpriteRenderer SR;
 
-	public float MoveSpeed;
-	public bool IsFacingRight;
+	[Header("Raycasting Elements")]
+	public GraphicRaycaster Ray;
+	public PointerEventData PointerEvent;
+	public EventSystem Events;
 
-	private Rigidbody2D RB;
 
 	private void Start()
 	{
-		RB = GetComponent<Rigidbody2D>();
+		Controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+		Anim = GetComponent<Animator>();
+		SR = GetComponent<SpriteRenderer>();
 	}
-
 
 	private void Update()
 	{
-		ButtonController();
-	}
+		PointerEvent = new PointerEventData(Events);                        // Set up a new PointerEvent
+		PointerEvent.position = Input.mousePosition;                        // Set up the PointerEvent to be where the mouse is
+		List<RaycastResult> Results = new List<RaycastResult>();            // Creating a list to store the raycase information
+		Ray.Raycast(PointerEvent, Results);
 
-
-	private void LeftMove()
-	{
-		RB.velocity += Vector2.left * MoveSpeed;
-		IsFacingRight = false;
-	}
-
-
-	private void RightMove()
-	{
-		RB.velocity += Vector2.right * MoveSpeed;
-		IsFacingRight = true;
-	}
-
-	private void ButtonController()
-	{
-		switch (Button)
+		if (Input.GetMouseButtonDown(0))                                    // If right click is pressed
 		{
-			case Buttons.Left:
-				LeftMove();
-				break;
-			case Buttons.Right:
-				RightMove();
-				break;
-			case Buttons.Up:
+			foreach (RaycastResult Hit in Results)
+			{
+				if (Hit.gameObject.name == "LeftButton")
+				{
+					foreach (Rigidbody2D I in Controller.RBs)
+					{
+						I.velocity = Vector2.left * Controller.MoveSpeed;
+						Anim.SetBool("IsMoving", true);
+						SR.flipX = false;
+					}
+				}
+				else if (Hit.gameObject.name == "RightButton")
+				{
+					foreach (Rigidbody2D I in Controller.RBs)
+					{
+						I.velocity = Vector2.right * Controller.MoveSpeed;
+						Anim.SetBool("IsMoving", true);
+						SR.flipX = true;
 
-				break;
-			default:
-				break;
+					}
+				}
+			}
+		}
+		
+		if (Input.GetMouseButtonUp(0))
+		{
+			foreach (Rigidbody2D I in Controller.RBs)
+			{
+				I.velocity = Vector2.zero;
+				Anim.SetBool("IsMoving", false);
+
+				if (WasLastLeft)
+				{
+					SR.flipX = false;
+					SR.sprite = IdleSide;
+				}
+				else
+				{
+					SR.flipX = true;
+					SR.sprite = IdleSide;
+				}
+			}
 		}
 	}
 
-	public void ChangeState(Buttons Input)
+
+	public void AndroidControls()               // Android controls for the game
 	{
-		Button = Input;
+		if (Input.touchCount == 1)
+		{
+			if (Input.GetTouch(0).phase == TouchPhase.Began)
+			{
+				var Touch = TouchPos();
+
+				if (Touch)
+				{
+
+				}
+			}
+
+			if (Input.GetTouch(0).phase == TouchPhase.Ended)
+			{
+				foreach (Rigidbody2D I in Controller.RBs)
+				{
+					I.velocity = Vector2.zero;
+				}
+			}
+		}
+	}
+
+	public Collider2D TouchPos()                // gets the touch position in the game
+	{
+		Vector3 V3Pos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+		Vector2 Pos = new Vector2(V3Pos.x, V3Pos.y);
+
+		var Hit = Physics2D.OverlapPoint(Pos);
+
+		return Hit;     // returns the hit object
 	}
 }
