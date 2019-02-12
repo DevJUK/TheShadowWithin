@@ -52,6 +52,7 @@ public enum Buttons
 	Lvl40,
 	Lvl41,
 	Lvl42,
+	Info,
 };
 
 public class ButtonController : MonoBehaviour
@@ -156,6 +157,8 @@ public class ButtonController : MonoBehaviour
 			case Buttons.Lvl41:
 				break;
 			case Buttons.Lvl42:
+				break;
+			case Buttons.Info:
 				break;
 			default:
 				break;
