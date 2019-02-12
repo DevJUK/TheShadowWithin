@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 {
 	public Sprite IdleSide;
 
+	private bool IsPlayer;
 	private bool WasLastLeft;
 	private GameController Controller;
 	private Animator Anim;
@@ -24,6 +25,11 @@ public class PlayerController : MonoBehaviour
 		Controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 		Anim = GetComponent<Animator>();
 		SR = GetComponent<SpriteRenderer>();
+
+		if (gameObject.name == "Player")
+		{
+			IsPlayer = true;
+		}
 	}
 
 	private void Update()
@@ -115,5 +121,18 @@ public class PlayerController : MonoBehaviour
 		var Hit = Physics2D.OverlapPoint(Pos);
 
 		return Hit;     // returns the hit object
+	}
+
+
+
+	private void OnCollisionEnter2D(Collision2D collision)
+	{
+		if (IsPlayer)
+		{
+			if (collision.gameObject.tag == "Emilies")
+			{
+				gameObject.SetActive(false);
+			}
+		}
 	}
 }
