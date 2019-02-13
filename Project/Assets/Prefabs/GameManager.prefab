@@ -46,3 +46,4 @@ MonoBehaviour:
   MoveSpeed: 2
   RBs:
   - {fileID: 0}
+  - {fileID: 0}
