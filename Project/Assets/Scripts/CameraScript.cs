@@ -20,8 +20,6 @@ public class CameraScript : MonoBehaviour
 		MinCamera = GameObject.Find("Level").GetComponent<CompositeCollider2D>().bounds.min;
 		MaxCamera = GameObject.Find("Level").GetComponent<CompositeCollider2D>().bounds.max;
 
-		Debug.Log(MinCamera + ":" + MaxCamera);
-
 		if (GameObject.Find("Hunter"))
 		{
 			Target = GameObject.Find("Hunter");
