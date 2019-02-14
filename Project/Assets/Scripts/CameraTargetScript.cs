@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraTargetScript : MonoBehaviour
 {
 
-	public Transform Target;
+	public RectTransform Target;
 
 	public float Speed = 10f;
 
@@ -15,7 +15,7 @@ public class CameraTargetScript : MonoBehaviour
 
 	private void Start()
 	{
-		Target = Targets[0].transform;
+		Target = Targets[0].gameObject.GetComponent<RectTransform>();
 
 		Debug.Log(transform.position + "|" + Target.GetComponent<RectTransform>().position);
 	}
@@ -24,10 +24,11 @@ public class CameraTargetScript : MonoBehaviour
 	{
 		if (I.GetComponent<RectTransform>())
 		{
-			Target = I.GetComponent<RectTransform>();
-			transform.position = new Vector3(transform.position.x - Target.transform.position.x * .67f, transform.position.y, transform.position.z);
+			Debug.Log(transform.position + "|" + Target.GetComponent<RectTransform>().position + "|");
 
-			Debug.Log(transform.position + "|" + Target.GetComponent<RectTransform>().position);
+			Target = I.GetComponent<RectTransform>();
+
+			Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, new Vector3(Target.transform.position.x, Target.transform.position.y, -10f), 1f);
 		}
 		else
 		{

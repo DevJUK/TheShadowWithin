@@ -9,7 +9,7 @@ public class MenuArrowScript : MonoBehaviour
 
 	private void Start()
 	{
-		TargetScript = GameObject.Find("Test").GetComponent<CameraTargetScript>();
+		TargetScript = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraTargetScript>();
 	}
 
 	public void MoveRight()
@@ -18,7 +18,7 @@ public class MenuArrowScript : MonoBehaviour
 		{
 			if (TargetScript.Target.gameObject == TargetScript.Targets[i])
 			{
-				TargetScript.SetTarget(TargetScript.Targets[i + 1]);
+				TargetScript.SetTarget(TargetScript.Targets[i + 1].gameObject);
 				break;
 			}
 		}
