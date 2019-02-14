@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuArrowScript : MonoBehaviour
 {
@@ -18,10 +19,42 @@ public class MenuArrowScript : MonoBehaviour
 		{
 			if (TargetScript.Target.gameObject == TargetScript.Targets[i])
 			{
-				TargetScript.SetTarget(TargetScript.Targets[i + 1].gameObject);
-				break;
+				if (i != (TargetScript.Targets.Length - 1))
+				{
+					TargetScript.SetTarget(TargetScript.Targets[i + 1].gameObject);
+					break;
+				}
+				else
+				{
+					break;
+				}
 			}
 		}
 	}
 
+
+	public void MoveLeft()
+	{
+		for (int i = 0; i < TargetScript.Targets.Length; i++)
+		{
+			if (TargetScript.Target.gameObject == TargetScript.Targets[i])
+			{
+				if (i != (TargetScript.Targets.Length - TargetScript.Targets.Length))
+				{
+					TargetScript.SetTarget(TargetScript.Targets[i - 1].gameObject);
+					break;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+	}
+
+
+	public void ReturnToMenu()
+	{
+		SceneManager.LoadSceneAsync("Menu");
+	}
 }
