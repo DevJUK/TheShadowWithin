@@ -7,16 +7,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 
+public enum States { Unlocked, Locked, Tick, Star };
+
 public class SaveScript : MonoBehaviour
 {
 
-	private GameController ControllerScript;
-	private TimerScript TimeScript;
+	private GameController Controller;
 
 	private void Start()
 	{
-		ControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-		TimeScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<TimerScript>();
+		Controller = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 	}
 
 
@@ -32,21 +32,48 @@ public class SaveScript : MonoBehaviour
 		GameData Data = new GameData();
 
 		// populating the new instance with the current values in the game
-		//Data.Score = ControllerScript.ReactorTotalPoints;
-		//Data.Energy = ControllerScript.Energy;
-		//Data.ReactorPoints = ControllerScript.EnergyPoints;
-		//Data.ReactorHealth = ControllerScript.ReactorHealth;
-		//Data.ReactorStability = ControllerScript.ReactorStability;
-		//Data.ReactorWaterLevel = ControllerScript.ReactorWater;
-		//Data.ReactorFuelLevel = ControllerScript.ReactorPower;
-		//Data.WaterBought = ControllerScript.WaterPower;
-		//Data.FuelBought = ControllerScript.ReactorFuel;
-		//Data.EnergyMultiplier = ControllerScript.Multiplier;
-		//Data.AutoWater = ControllerScript.AutoWater;
-		//Data.AutoFuel = ControllerScript.AutoFuel;
-		//Data.AutoEnergy = ControllerScript.AutoMultiply;
-		//Data.Time = TimeScript.Timer;
-		//Data.ThemeBought = ControllerScript.ThemeBought;
+		Data.Lvl1 = Controller.Lvl1;
+		Data.Lvl2 = Controller.Lvl2;
+		Data.Lvl3 = Controller.Lvl3;
+		Data.Lvl4 = Controller.Lvl4;
+		Data.Lvl5 = Controller.Lvl5;
+		Data.Lvl6 = Controller.Lvl6;
+		Data.Lvl7 = Controller.Lvl7;
+		Data.Lvl8 = Controller.Lvl8;
+		Data.Lvl9 = Controller.Lvl9;
+		Data.Lvl10 = Controller.Lvl10;
+		Data.Lvl11 = Controller.Lvl11;
+		Data.Lvl12 = Controller.Lvl12;
+		Data.Lvl13 = Controller.Lvl13;
+		Data.Lvl14 = Controller.Lvl14;
+		Data.Lvl15 = Controller.Lvl15;
+		Data.Lvl16 = Controller.Lvl16;
+		Data.Lvl17 = Controller.Lvl17;
+		Data.Lvl18 = Controller.Lvl18;
+		Data.Lvl19 = Controller.Lvl19;
+		Data.Lvl20 = Controller.Lvl20;
+		Data.Lvl21 = Controller.Lvl21;
+		Data.Lvl22 = Controller.Lvl22;
+		Data.Lvl23 = Controller.Lvl23;
+		Data.Lvl24 = Controller.Lvl24;
+		Data.Lvl25 = Controller.Lvl25;
+		Data.Lvl26 = Controller.Lvl26;
+		Data.Lvl27 = Controller.Lvl27;
+		Data.Lvl28 = Controller.Lvl28;
+		Data.Lvl29 = Controller.Lvl29;
+		Data.Lvl30 = Controller.Lvl30;
+		Data.Lvl31 = Controller.Lvl31;
+		Data.Lvl32 = Controller.Lvl32;
+		Data.Lvl33 = Controller.Lvl33;
+		Data.Lvl34 = Controller.Lvl34;
+		Data.Lvl35 = Controller.Lvl35;
+		Data.Lvl36 = Controller.Lvl36;
+		Data.Lvl37 = Controller.Lvl37;
+		Data.Lvl38 = Controller.Lvl38;
+		Data.Lvl39 = Controller.Lvl39;
+		Data.Lvl40 = Controller.Lvl40;
+		Data.Lvl41 = Controller.Lvl41;
+		Data.Lvl42 = Controller.Lvl42;
 
 		// Converts to binrary, using the data from the data thingy in a data file
 		BinFormat.Serialize(DataFile, Data);
@@ -76,27 +103,51 @@ public class SaveScript : MonoBehaviour
 
 
 			// Sets the values to the values that were in the file
-
-			//ControllerScript.ReactorTotalPoints = Data.Score;
-			//ControllerScript.Energy = Data.Energy;
-			//ControllerScript.EnergyPoints = Data.ReactorPoints;
-			//ControllerScript.ReactorHealth = Data.ReactorHealth;
-			//ControllerScript.ReactorStability = Data.ReactorStability;
-			//ControllerScript.ReactorWater = Data.ReactorWaterLevel;
-			//ControllerScript.ReactorPower = Data.ReactorFuelLevel;
-			//ControllerScript.WaterPower = Data.WaterBought;
-			//ControllerScript.ReactorFuel = Data.FuelBought;
-			//ControllerScript.Multiplier = Data.EnergyMultiplier;
-			//ControllerScript.AutoWater = Mathf.RoundToInt(Data.AutoWater);
-			//ControllerScript.AutoFuel = Mathf.RoundToInt(Data.AutoFuel);
-			//ControllerScript.AutoMultiply = Mathf.RoundToInt(Data.AutoEnergy);
-			//TimeScript.Timer = Data.Time;
-			//ControllerScript.ThemeBought = Data.ThemeBought;
+			Controller.Lvl1 = Data.Lvl1;
+			Controller.Lvl2 = Data.Lvl2;
+			Controller.Lvl3 = Data.Lvl3;
+			Controller.Lvl4 = Data.Lvl4;
+			Controller.Lvl5 = Data.Lvl5;
+			Controller.Lvl6 = Data.Lvl6;
+			Controller.Lvl7 = Data.Lvl7;
+			Controller.Lvl8 = Data.Lvl8;
+			Controller.Lvl9 = Data.Lvl9;
+			Controller.Lvl10 = Data.Lvl10;
+			Controller.Lvl11 = Data.Lvl11;
+			Controller.Lvl12 = Data.Lvl12;
+			Controller.Lvl13 = Data.Lvl13;
+			Controller.Lvl14 = Data.Lvl14;
+			Controller.Lvl15 = Data.Lvl15;
+			Controller.Lvl16 = Data.Lvl16;
+			Controller.Lvl17 = Data.Lvl17;
+			Controller.Lvl18 = Data.Lvl18;
+			Controller.Lvl19 = Data.Lvl19;
+			Controller.Lvl20 = Data.Lvl20;
+			Controller.Lvl21 = Data.Lvl21;
+			Controller.Lvl22 = Data.Lvl22;
+			Controller.Lvl23 = Data.Lvl23;
+			Controller.Lvl24 = Data.Lvl24;
+			Controller.Lvl25 = Data.Lvl25;
+			Controller.Lvl26 = Data.Lvl26;
+			Controller.Lvl27 = Data.Lvl27;
+			Controller.Lvl28 = Data.Lvl28;
+			Controller.Lvl29 = Data.Lvl29;
+			Controller.Lvl30 = Data.Lvl30;
+			Controller.Lvl31 = Data.Lvl31;
+			Controller.Lvl32 = Data.Lvl32;
+			Controller.Lvl33 = Data.Lvl33;
+			Controller.Lvl34 = Data.Lvl34;
+			Controller.Lvl35 = Data.Lvl35;
+			Controller.Lvl36 = Data.Lvl36;
+			Controller.Lvl37 = Data.Lvl37;
+			Controller.Lvl38 = Data.Lvl38;
+			Controller.Lvl39 = Data.Lvl39;
+			Controller.Lvl40 = Data.Lvl40;
+			Controller.Lvl41 = Data.Lvl41;
+			Controller.Lvl42 = Data.Lvl42;
 
 		}
-
-		// Loads the level scene again
-		ControllerScript.ChangeLevelState(GameStates.Level);
+		
 	}
 
 
@@ -106,24 +157,46 @@ public class SaveScript : MonoBehaviour
 [Serializable]
 class GameData
 {
-	public enum States { Unlocked, Locked, Tick, Star };
-
 	public States Lvl1;
 	public States Lvl2;
-
-	//public float Score;
-	//public float Energy;
-	//public float ReactorPoints;
-	//public float ReactorStability;
-	//public float ReactorHealth;
-	//public float ReactorWaterLevel;
-	//public float ReactorFuelLevel;
-	//public float WaterBought;
-	//public float FuelBought;
-	//public float EnergyMultiplier;
-	//public float AutoWater;
-	//public float AutoFuel;
-	//public float AutoEnergy;
-	//public float Time;
-	//public bool ThemeBought;
+	public States Lvl3;
+	public States Lvl4;
+	public States Lvl5;
+	public States Lvl6;
+	public States Lvl7;
+	public States Lvl8;
+	public States Lvl9;
+	public States Lvl10;
+	public States Lvl11;
+	public States Lvl12;
+	public States Lvl13;
+	public States Lvl14;
+	public States Lvl15;
+	public States Lvl16;
+	public States Lvl17;
+	public States Lvl18;
+	public States Lvl19;
+	public States Lvl20;
+	public States Lvl21;
+	public States Lvl22;
+	public States Lvl23;
+	public States Lvl24;
+	public States Lvl25;
+	public States Lvl26;
+	public States Lvl27;
+	public States Lvl28;
+	public States Lvl29;
+	public States Lvl30;
+	public States Lvl31;
+	public States Lvl32;
+	public States Lvl33;
+	public States Lvl34;
+	public States Lvl35;
+	public States Lvl36;
+	public States Lvl37;
+	public States Lvl38;
+	public States Lvl39;
+	public States Lvl40;
+	public States Lvl41;
+	public States Lvl42;
 }
