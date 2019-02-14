@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
 	public Sprite IdleSide;
+	public float RayLenght;
 
 	private bool IsPlayer;
 	private bool WasLastLeft;
@@ -39,10 +40,27 @@ public class PlayerController : MonoBehaviour
 		List<RaycastResult> Results = new List<RaycastResult>();            // Creating a list to store the raycase information
 		Ray.Raycast(PointerEvent, Results);
 
+		Debug.DrawLine(transform.position, transform.position + new Vector3(0, RayLenght, 0), Color.white);
+
 		if (Input.GetMouseButtonDown(0))                                    // If right click is pressed
 		{
 			foreach (RaycastResult Hit in Results)
 			{
+				if (Hit.gameObject.name == "UpButton")
+				{
+					foreach (Rigidbody2D I in Controller.RBs)
+					{
+						if (Physics2D.Linecast(transform.position, transform.position + new Vector3(0, RayLenght, 0), 1 << LayerMask.NameToLayer("Land")))
+						{
+							I.AddForce(Vector2.up * Controller.JumpHeight);
+						}
+
+
+					}
+				}
+
+
+
 				if (Hit.gameObject.name == "LeftButton")
 				{
 					foreach (Rigidbody2D I in Controller.RBs)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
 	public float MoveSpeed;
+	public float JumpHeight;
 	public Rigidbody2D[] RBs;
 
 	public States Lvl1 = States.Unlocked;

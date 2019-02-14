@@ -201,6 +201,11 @@ PrefabInstance:
       propertyPath: Ray
       value: 
       objectReference: {fileID: 1764374013}
+    - target: {fileID: 2984316447621900932, guid: cd40312e325e8b94ea2c3c7e32d8dcad,
+        type: 3}
+      propertyPath: RayLenght
+      value: 10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd40312e325e8b94ea2c3c7e32d8dcad, type: 3}
 --- !u!1 &647526640
@@ -361,6 +366,86 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d9963c680acd45243b96a58a12328931, type: 3}
+--- !u!224 &1061401194 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 1995603913669666459, guid: d9963c680acd45243b96a58a12328931,
+    type: 3}
+  m_PrefabInstance: {fileID: 1061401193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1128480107
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1128480108}
+  - component: {fileID: 1128480110}
+  - component: {fileID: 1128480109}
+  m_Layer: 0
+  m_Name: UpButton
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1128480108
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128480107}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1061401194}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 700, y: -5}
+  m_SizeDelta: {x: 75, y: 75}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1128480109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128480107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_Sprite: {fileID: 21300000, guid: f1397377bfeaa5141afa7e2f89f060e3, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+--- !u!222 &1128480110
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128480107}
+  m_CullTransparentMesh: 0
 --- !u!114 &1764374013 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1995603914674179561, guid: d9963c680acd45243b96a58a12328931,
@@ -516,6 +601,11 @@ PrefabInstance:
       propertyPath: RBs.Array.data[0]
       value: 
       objectReference: {fileID: 298835298}
+    - target: {fileID: 4434959426906578556, guid: dec3ed77d32484143a263fed7ecc422d,
+        type: 3}
+      propertyPath: JumpHeight
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dec3ed77d32484143a263fed7ecc422d, type: 3}
 --- !u!483693784 &7727315349616983052
@@ -5016,7 +5106,7 @@ GameObject:
   - component: {fileID: 7727315349616983055}
   - component: {fileID: 7727315349616983052}
   - component: {fileID: 7727315349616983054}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tilemap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5168,7 +5258,7 @@ GameObject:
   - component: {fileID: 7727315349642175430}
   - component: {fileID: 7727315349642175431}
   - component: {fileID: 7727315349642175428}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Level
   m_TagString: Untagged
   m_Icon: {fileID: 0}
