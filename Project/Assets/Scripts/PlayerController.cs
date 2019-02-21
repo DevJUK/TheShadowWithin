@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		PointerEvent = new PointerEventData(Events);                        // Set up a new PointerEvent
 		PointerEvent.position = Input.mousePosition;                        // Set up the PointerEvent to be where the mouse is
@@ -46,21 +46,6 @@ public class PlayerController : MonoBehaviour
 		{
 			foreach (RaycastResult Hit in Results)
 			{
-				if (Hit.gameObject.name == "UpButton")
-				{
-					foreach (Rigidbody2D I in Controller.RBs)
-					{
-						if (Physics2D.Linecast(transform.position, transform.position + new Vector3(0, RayLenght, 0), 1 << LayerMask.NameToLayer("Land")))
-						{
-							I.AddForce(Vector2.up * Controller.JumpHeight);
-						}
-
-
-					}
-				}
-
-
-
 				if (Hit.gameObject.name == "LeftButton")
 				{
 					foreach (Rigidbody2D I in Controller.RBs)
@@ -151,6 +136,16 @@ public class PlayerController : MonoBehaviour
 			{
 				gameObject.SetActive(false);
 			}
+		}
+	}
+
+
+
+	public void Jump()
+	{
+		foreach (Rigidbody2D I in Controller.RBs)
+		{
+			I.velocity = new Vector2(0, 5);
 		}
 	}
 }
