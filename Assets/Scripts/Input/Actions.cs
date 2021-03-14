@@ -24,9 +24,17 @@ namespace CarterGames.TheShadowWithin
                     ""name"": ""Move"",
                     ""type"": ""PassThrough"",
                     ""id"": ""255475d5-acc8-4cfe-9184-aa685c0093b1"",
-                    ""expectedControlType"": ""Double"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
-                    ""interactions"": """"
+                    ""interactions"": ""Press(behavior=2)""
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""b9f7ddd3-7c62-4666-9a99-0f682ac251e9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press(behavior=2)""
                 }
             ],
             ""bindings"": [
@@ -47,7 +55,7 @@ namespace CarterGames.TheShadowWithin
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -58,7 +66,7 @@ namespace CarterGames.TheShadowWithin
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -80,7 +88,7 @@ namespace CarterGames.TheShadowWithin
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -91,19 +99,48 @@ namespace CarterGames.TheShadowWithin
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""275dba40-d5dc-43eb-8b53-9e645082c929"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
     ],
-    ""controlSchemes"": []
+    ""controlSchemes"": [
+        {
+            ""name"": ""PC"",
+            ""bindingGroup"": ""PC"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
+        }
+    ]
 }");
             // Platformer
             m_Platformer = asset.FindActionMap("Platformer", throwIfNotFound: true);
             m_Platformer_Move = m_Platformer.FindAction("Move", throwIfNotFound: true);
+            m_Platformer_Jump = m_Platformer.FindAction("Jump", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -154,11 +191,13 @@ namespace CarterGames.TheShadowWithin
         private readonly InputActionMap m_Platformer;
         private IPlatformerActions m_PlatformerActionsCallbackInterface;
         private readonly InputAction m_Platformer_Move;
+        private readonly InputAction m_Platformer_Jump;
         public struct PlatformerActions
         {
             private @Actions m_Wrapper;
             public PlatformerActions(@Actions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Move => m_Wrapper.m_Platformer_Move;
+            public InputAction @Jump => m_Wrapper.m_Platformer_Jump;
             public InputActionMap Get() { return m_Wrapper.m_Platformer; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -171,6 +210,9 @@ namespace CarterGames.TheShadowWithin
                     @Move.started -= m_Wrapper.m_PlatformerActionsCallbackInterface.OnMove;
                     @Move.performed -= m_Wrapper.m_PlatformerActionsCallbackInterface.OnMove;
                     @Move.canceled -= m_Wrapper.m_PlatformerActionsCallbackInterface.OnMove;
+                    @Jump.started -= m_Wrapper.m_PlatformerActionsCallbackInterface.OnJump;
+                    @Jump.performed -= m_Wrapper.m_PlatformerActionsCallbackInterface.OnJump;
+                    @Jump.canceled -= m_Wrapper.m_PlatformerActionsCallbackInterface.OnJump;
                 }
                 m_Wrapper.m_PlatformerActionsCallbackInterface = instance;
                 if (instance != null)
@@ -178,13 +220,26 @@ namespace CarterGames.TheShadowWithin
                     @Move.started += instance.OnMove;
                     @Move.performed += instance.OnMove;
                     @Move.canceled += instance.OnMove;
+                    @Jump.started += instance.OnJump;
+                    @Jump.performed += instance.OnJump;
+                    @Jump.canceled += instance.OnJump;
                 }
             }
         }
         public PlatformerActions @Platformer => new PlatformerActions(this);
+        private int m_PCSchemeIndex = -1;
+        public InputControlScheme PCScheme
+        {
+            get
+            {
+                if (m_PCSchemeIndex == -1) m_PCSchemeIndex = asset.FindControlSchemeIndex("PC");
+                return asset.controlSchemes[m_PCSchemeIndex];
+            }
+        }
         public interface IPlatformerActions
         {
             void OnMove(InputAction.CallbackContext context);
+            void OnJump(InputAction.CallbackContext context);
         }
     }
 }
